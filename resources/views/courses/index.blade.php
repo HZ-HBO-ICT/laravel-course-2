@@ -19,6 +19,7 @@
                                 <li>Eind datum: {{$row->end_date}}</li>
                             </ul>   
                     </div>
+                    <button type="button" class="btn btn-warning">Edit</button>
                 </div>
             </div>    
         @endforeach

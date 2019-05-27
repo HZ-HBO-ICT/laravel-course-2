@@ -18,3 +18,7 @@ Route::get('/', function () {
 
 Route::resource('/terms', 'TermsController'); //all in one
 Route::resource('/courses', 'CoursesController'); //all in one
+
+Auth::routes();
+
+Route::get('/', 'HomeController@index')->name('home');

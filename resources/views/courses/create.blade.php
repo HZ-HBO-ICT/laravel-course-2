@@ -4,23 +4,32 @@
 
 @section('content')
 
-    <h1>Create an assignment</h1>
+    <h1>Create an course</h1>
     
-    <form method="POST" action={{ url("/assignments") }}>
+    <form method="POST" action={{ url("/courses") }}>
         
         {{ csrf_field() }}
 
         <div class="form-group">
-          <label for="projectNameInput">Project name</label>
-          <input type="text" class="form-control {{ $errors->has('projectNameInput') ? 'invalid' : '' }}" id="projectNameInput" name="projectNameInput" placeholder="insert your project name" required>
+          <label for="name">Course name</label>
+          <input type="text" class="form-control {{ $errors->has('name') ? 'invalid' : '' }}" id="name" name="name" placeholder="insert your course name" required>
         </div>
         <div class="form-group">
-            <label for="imageUrlInput">Project Image</label>
-            <input type="text" class="form-control {{ $errors->has('imageUrlInput') ? 'invalid' : '' }}" id="imageUrlInput" name="imageUrlInput" placeholder="insert your project image url">
-          </div>
+            <label for="start_date">Start date</label>
+            <input type="date" class="form-control {{ $errors->has('start_date') ? 'invalid' : '' }}" id="start_date" name="start_date">
+        </div>
         <div class="form-group">
-          <label for="projectDescriptionTextArea">Project description</label>
-          <textarea class="form-control {{ $errors->has('projectDescriptionTextArea') ? 'invalid' : '' }}" id="projectDescriptionTextArea" name="projectDescriptionTextArea" rows="4" required></textarea>
+          <label for="end_date">End date</label>
+          <input type="date" class="form-control {{ $errors->has('end_date') ? 'invalid' : '' }}" id="end_date" name="end_date">
+        </div>
+        <div class="form-group">
+          <label for="term">Select Term</label>
+          <select class="form-control" name="term" id="term">
+            
+            @foreach ($terms as $term)
+              <option>{{ $term->title }}</option>
+            @endforeach
+          </select>
         </div>
         <div class="form-group">
             <button type="submit" class="form-control btn btn-primary mb-2">Submit</button>

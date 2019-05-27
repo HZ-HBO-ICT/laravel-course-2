@@ -10,4 +10,5 @@ class Course extends Model
     {
         return $this->belongsTo(Term::class);
     }
+    public $timestamps = false;
 }

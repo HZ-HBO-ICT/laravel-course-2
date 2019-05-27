@@ -10,4 +10,5 @@ class Term extends Model
     {
         return $this->hasMany(Course::class);
     }
+    public $timestamps = false;
 }

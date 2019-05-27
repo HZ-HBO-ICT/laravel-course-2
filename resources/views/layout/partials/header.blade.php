@@ -4,6 +4,8 @@
 
     <title>@yield('title', 'My Portfolio Site')</title>
 
+    <script src="{{ asset('js/app.js') }}" defer></script>
+
     <link rel="stylesheet" href="{{asset('css/app.css')}}">
 
 </head>

@@ -3,10 +3,18 @@
 namespace App\Http\Controllers;
 
 use App\Course;
+use App\Term;
 use Illuminate\Http\Request;
 
 class CoursesController extends Controller
 {
+
+    public function __construct()
+    {
+        //middleware to check if you are authenticated, except for the index page.
+        $this->middleware('auth')->except(['index']);
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -25,8 +33,9 @@ class CoursesController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function create()
-    {
-        //
+    {   
+        $terms = Term::all();
+        return view('courses.create', compact('terms'));
     }
 
     /**
@@ -36,8 +45,18 @@ class CoursesController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    {
-        //
+    {   
+
+        $course = new Course();
+        $course->name = $request->name;
+        $course->start_date = $request->start_date;
+        $course->end_date = $request->end_date;
+        $termId = Term::where('title', $request->term)->first()->id;
+        $course->term_id = $termId;
+        $course->save();
+
+        return redirect('/courses');
+
     }
 
     /**
@@ -57,9 +76,11 @@ class CoursesController extends Controller
      * @param  \App\Course  $course
      * @return \Illuminate\Http\Response
      */
-    public function edit(Course $course)
-    {
-        //
+    public function edit($id)
+    {   
+        $terms = Term::all();
+        $course = Course::findOrFail($id);
+        return view('courses.edit', compact('course', 'terms'));
     }
 
     /**

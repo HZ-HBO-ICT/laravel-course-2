@@ -27,9 +27,12 @@ class CreateCoursesTable extends Migration
             $table->dateTime('start_date')->nullable();
             $table->dateTime('end_date')->nullable();
             $table->unsignedInteger('term_id')->nullable();
+            $table->unsignedInteger('owner_id');
 
             $table->index(["term_id"], 'FK_courses_terms_idx');
 
+            $table->foreign('owner_id', 'FK_courses_users_idx')
+                ->references('id')->on('users');
 
             $table->foreign('term_id', 'FK_courses_terms_idx')
                 ->references('id')->on('terms')
